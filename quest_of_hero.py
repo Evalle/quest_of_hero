@@ -1,19 +1,7 @@
 from sys import exit
 import random
 
-# variables
-lives = 3
-tip1 = "\nTIP: To check your inventory type 'inventory'\n"
-tip2 = "\nTIP: To check your lives type 'lives'\n"
-tip3 = "\nTIP: To return to your previous location type 'back'\n"
-tip4 = "\nTIP: To exit the game type 'exit'\n"
-
-# lists
-tips = [tip1, tip2, tip3, tip4]
-inventory = []
-
 # classes
-# use this class like this: print bcolors.RED + "Warning: No active frommets remain. Continue?" + bcolors.END
 class bcolors:
     HEADER = '\033[95m'
     BLUE = '\033[94m'
@@ -23,6 +11,18 @@ class bcolors:
     END = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
+# variables
+lives = 3
+tip1 = "\nTIP: To check your inventory type 'inventory'\n"
+tip2 = "\nTIP: To check your lives type 'lives'\n"
+tip3 = "\nTIP: To return to your previous location type 'back'\n"
+tip4 = "\nTIP: To exit the game type 'exit'\n"
+welcome_messsage = (bcolors.HEADER + "\n>>> Welcome to the Quest of Hero! <<<" + bcolors.END)
+
+# lists
+tips = [tip1, tip2, tip3, tip4]
+inventory = []
 
 # this function is for hero's inventory checking
 def check_invent():
@@ -69,8 +69,10 @@ def damage():
 
 def choice_gold_room():
     print '''
-    The room became lighter, now you can see two doors, one in the center,
-    another in the right from you. Which one you will choose?
+    --------------------------------------------------------------------------
+    | The room became lighter, now you can see two doors, one in the center, |
+    | another in the right from you. Which one you will choose?              |
+    --------------------------------------------------------------------------
     '''
     another_choice = raw_input("> Make your choice: ")
     if "right" in another_choice:
@@ -79,13 +81,13 @@ def choice_gold_room():
         puzzle_room1()
     elif "back" in another_choice:
         start()
-    elif "inventory" in choice:
+    elif "inventory" in another_choice:
         check_invent()
-        gold_room()
-    elif "lives" in choice:
+        choice_gold_room()
+    elif "lives" in another_choice:
         check_lives()
-        gold_room()
-    elif "exit" in choice:
+        choice_gold_room()
+    elif "exit" in another_choice:
         exit(0)
     else:
         print '''
@@ -93,11 +95,7 @@ def choice_gold_room():
         '''
         choice_gold_room()
 
-# start the game
 def start():
-    print bcolors.HEADER + '''
-    >>> Welcome to the Quest of Hero! <<<
-    ''' + bcolors.END
     tip_rand()
     global lives
 
@@ -224,9 +222,8 @@ def lab_room():
             print bcolors.BLUE + '''
     -----------------------------------------
     | You feel a fire inside you.           |
-    | You last thought in this life was:    |
-    | "This is was a not good idea to drink |
-    | a potion in Sorcerer's room"          |
+    | This was not good idea to drink       |
+    | a potion in sorcerer's room...        |
     -----------------------------------------
         ''' + bcolors.END
             damage()
@@ -242,7 +239,7 @@ def lab_room():
     ''' + bcolors.END
             damage()
             start()
-#       elif ""
+
         elif "inventory" in choice:
             check_invent()
             lab_room()
@@ -253,6 +250,8 @@ def lab_room():
             turn_back(start())
         elif "exit" in choice:
             exit(0)
+        elif "back" in choice and 'shield' or 'sword' in inventory:
+            print "It's strange, but door is closed"
         else:
             print bcolors.BLUE + '''
             I can't understand you! ''' + bcolors.END
@@ -266,6 +265,42 @@ def puzzle_room1():
         dead()
     else:
         print '''
+        You're in the puzzle_room1
         '''
 
+def monster_room1():
+    tip_rand()
+    global lives
+
+    if lives == 0:
+        dead()
+    else:
+        print '''
+        You're in the monster_room1
+        '''
+
+def puzzle_room2():
+    tip_rand()
+    global lives
+
+    if lives == 0:
+        dead()
+    else:
+        print '''
+        You're in the puzzle room
+        '''
+
+def monster_room2():
+    tip_rand()
+    global lives
+
+    if lives == 0:
+        dead()
+    else:
+        print '''
+        You're in the puzzle room
+        '''
+
+# start the game
+print welcome_messsage
 start()

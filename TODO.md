@@ -3,4 +3,5 @@
 - [ ] Add puzzle_room2();
 - [ ] Add monster_room2();
 - [ ] Add boss_room();
+- [ ] Fix an issue with double taking sword or shield;
 - [ ] Rewrite main script by using the module architecture;
