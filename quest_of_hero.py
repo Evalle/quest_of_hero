@@ -201,6 +201,7 @@ def gold_room():
 def lab_room():
     tip_rand()
     global lives
+    global inventory
 
     if lives == 0:
         dead()
@@ -246,16 +247,24 @@ def lab_room():
         elif "lives" in choice:
             check_lives()
             lab_room()
-        elif "back" in choice:
+        elif "back" in choice and not inventory:
             turn_back(start())
         elif "exit" in choice:
             exit(0)
         elif "back" in choice and 'shield' or 'sword' in inventory:
-            print "It's strange, but door is closed"
-        else:
             print bcolors.BLUE + '''
-            I can't understand you! ''' + bcolors.END
-            gold_room()
+    ------------------------------------
+    | It's strange, but door is closed |
+    ------------------------------------
+            ''' + bcolors.END
+            lab_room()
+        else:
+            print bcolors.RED + '''
+    ---------------------------
+    | I can't understand you! |
+    ---------------------------
+    ''' + bcolors.END
+            lab_room()
 
 def puzzle_room1():
     tip_rand()
