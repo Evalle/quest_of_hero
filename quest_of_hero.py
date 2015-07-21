@@ -67,6 +67,33 @@ def damage():
     lives = lives - 1
     return lives
 
+def choice_gold_room():
+    print '''
+    ...now you can see two doors behind the statue, one in the center,
+    another in the right from you. Which one you will choose?
+    '''
+    another_choice = raw_input("> Make your choice: ")
+    if "right" in another_choice:
+        lab_room()
+    elif "center" in another_choice:
+        puzzle_room1()
+    elif "back" in another_choice:
+        start()
+    elif "inventory" in choice:
+        check_invent()
+        gold_room()
+    elif "lives" in choice:
+        check_lives()
+        gold_room()
+    elif "exit" in choice:
+        exit(0)
+        gold_room()
+    else:
+        print '''
+        Make your choice!
+        '''
+        another_choice()
+
 # start the game
 def start():
     tip_rand()
@@ -100,9 +127,11 @@ def start():
         elif "back" in choice:
             turn_back(start())
         else:
-            print '''
-    == Please choose your door ==
-    '''
+            print bcolors.BLUE + '''
+    ---------------------------
+    | Please choose your door |
+    ---------------------------
+    ''' + bcolors.END
             start()
 
 def gold_room():
@@ -141,9 +170,7 @@ def gold_room():
     | Now you have the sword, good job! |
     -------------------------------------
             ''' + bcolors.END
-            print '''
-    '''
-            gold_room()
+            choice_gold_room()
         elif "take" and "shield" in choice:
             inventory.append('shield')
             print bcolors.BLUE + '''
@@ -151,7 +178,7 @@ def gold_room():
     | Now you have the shield, good job! |
     --------------------------------------
             ''' + bcolors.END
-            gold_room()
+            choice_gold_room()
         elif "inventory" in choice:
             check_invent()
             gold_room()
