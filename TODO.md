@@ -1,2 +1,6 @@
-- [ ] End the game;
+- [ ] Add puzzle_room1();
+- [ ] Add monster_room1();
+- [ ] Add puzzle_room2();
+- [ ] Add monster_room2();
+- [ ] Add boss_room();
 - [ ] Rewrite main script by using the module architecture;

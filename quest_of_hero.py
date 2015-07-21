@@ -69,7 +69,7 @@ def damage():
 
 def choice_gold_room():
     print '''
-    ...now you can see two doors behind the statue, one in the center,
+    The room became lighter, now you can see two doors, one in the center,
     another in the right from you. Which one you will choose?
     '''
     another_choice = raw_input("> Make your choice: ")
@@ -87,21 +87,24 @@ def choice_gold_room():
         gold_room()
     elif "exit" in choice:
         exit(0)
-        gold_room()
     else:
         print '''
         Make your choice!
         '''
-        another_choice()
+        choice_gold_room()
 
 # start the game
 def start():
+    print bcolors.HEADER + '''
+    >>> Welcome to the Quest of Hero! <<<
+    ''' + bcolors.END
     tip_rand()
     global lives
 
     if lives == 0:
         dead()
     else:
+
         print '''
     ------------------------------------------------------
     | You're in the middle of the strange dark cave.     |
@@ -239,7 +242,7 @@ def lab_room():
     ''' + bcolors.END
             damage()
             start()
-#        elif ""
+#       elif ""
         elif "inventory" in choice:
             check_invent()
             lab_room()
@@ -254,5 +257,15 @@ def lab_room():
             print bcolors.BLUE + '''
             I can't understand you! ''' + bcolors.END
             gold_room()
+
+def puzzle_room1():
+    tip_rand()
+    global lives
+
+    if lives == 0:
+        dead()
+    else:
+        print '''
+        '''
 
 start()
