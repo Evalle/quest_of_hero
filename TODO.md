@@ -1,5 +1,5 @@
 - [ ] Finish lab_room();
-- [*] Finish gold_room();
+- [X] Finish gold_room();
 - [ ] Add puzzle_room1();
 - [ ] Add monster_room1();
 - [ ] Add puzzle_room2();
