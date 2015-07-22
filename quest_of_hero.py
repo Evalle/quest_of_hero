@@ -240,7 +240,29 @@ def lab_room():
     ''' + bcolors.END
             damage()
             start()
-
+        elif "mix" and ("blue" and "green") in choice:
+            print bcolors.BLUE + '''
+    ---------------------------
+    | Walls are dissapeared...|
+    ---------------------------
+    ''' + bcolors.END
+            monster_room1()
+        elif "mix" and ("red" or "blue") in choice:
+            print bcolors.BLUE + '''
+    ---------
+    | BOOM! |
+    ---------
+            ''' + bcolors.END
+            damage()
+            start()
+        elif "mix" and ("red" or "green") in choice:
+            print bcolors.BLUE + '''
+    ---------
+    | BOOM! |
+    ---------
+            ''' + bcolors.END
+            damage()
+            start()
         elif "inventory" in choice:
             check_invent()
             lab_room()
