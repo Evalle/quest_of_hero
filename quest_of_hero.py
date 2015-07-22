@@ -67,6 +67,27 @@ def damage():
     lives = lives - 1
     return lives
 
+def cant_understand():
+    print bcolors.RED + '''
+    ---------------------------
+    | I can't understand you! |
+    ---------------------------
+    ''' + bcolors.END
+
+def cant_doit():
+    print bcolors.RED + '''
+    --------------------
+    | You can't do it! |
+    --------------------
+    ''' + bcolors.END
+
+def choose_your_door():
+    print bcolors.RED + '''
+    -----------------------------
+    | Please, choose your door! |
+    -----------------------------
+    ''' + bcolors.END
+
 def choice_gold_room():
     print '''
     --------------------------------------------------------------------------
@@ -80,11 +101,7 @@ def choice_gold_room():
     elif "center" in another_choice:
         puzzle_room()
     elif "back" in another_choice:
-        print bcolors.RED + '''
-    ----------------------
-    | You can't do that! |
-    ----------------------
-        ''' + bcolors.END
+        cant_doit()
         choice_gold_room()
     elif "inventory" in another_choice:
         check_invent()
@@ -95,10 +112,29 @@ def choice_gold_room():
     elif "exit" in another_choice:
         exit(0)
     else:
-        print '''
-        Make your choice!
-        '''
+        choose_your_door()
         choice_gold_room()
+
+def choice_puzzle_room():
+    print bcolors.BLUE + '''
+    ----------------------------------------------------
+    | Walls are disspapeared, you can see two doors    |
+    | one in the center, another in the right from you |
+    | which one you will choose?                       |
+    ----------------------------------------------------
+    ''' + bcolors.END
+    another_choice = raw_input('> Choose the door: ')
+
+    # go to final room
+    if another_choice == 'center':
+        boss_room()
+    elif another_choice == 'right':
+        monster_room()
+    elif another_choice == 'exit':
+        exit(0)
+    else:
+        cant_doit()
+        choice_lab_room()
 
 def start():
     tip_rand()
@@ -133,19 +169,8 @@ def start():
         elif "back" in choice:
             turn_back(start())
         else:
-            print bcolors.BLUE + '''
-    ---------------------------
-    | Please choose your door |
-    ---------------------------
-    ''' + bcolors.END
+            choose_your_door()
             start()
-
-def cant_understand():
-    print bcolors.RED + '''
----------------------------
-| I can't understand you! |
----------------------------
-''' + bcolors.END
 
 def gold_room():
     tip_rand()
@@ -304,32 +329,17 @@ def puzzle_room():
 
     # positive:
     if choice == "HARD":
-        print bcolors.BLUE + '''
-    ----------------------------------------------------
-    | Walls are disspapeared, you can see two doors    |
-    | one in the center, another in the right from you |
-    | which one you will choose?                       |
-    ----------------------------------------------------
-    ''' + bcolors.END
-        another_choice = raw_input('> Choose the door: ')
+        choice_puzzle_room()
 
-        # go to final room
-        if another_choice == 'center':
-            boss_room()
-        elif another_choice == 'right':
-            monster_room()
-        elif another_choice == 'exit':
-            exit(0)
-        else:
-            print "You can't do that!"
     elif "inventory" in choice:
         check_invent()
         lab_room()
     elif "lives" in choice:
         check_lives()
         lab_room()
-    elif "back" in choice and not inventory:
-        turn_back(start())
+    elif "back" in choice:
+        cant_doit()
+        puzzle_room()
     elif "exit" in choice:
         exit(0)
     else:
