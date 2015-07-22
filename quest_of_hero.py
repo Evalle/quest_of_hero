@@ -211,7 +211,7 @@ def lab_room():
     | You're in the Great Sorcerer's labaratory.                            |
     | You see a lot of interesting stuff here.                              |
     | Bat wings, skulls, and old books with strange sparkly names on them.  |
-    | On the big wood table you can see three poitions:                     |
+    | On the big table you can see three poitions:                          |
     | o A blue one.                                                         |
     | o A green one.                                                        |
     | o And a red one.                                                      |
@@ -223,7 +223,7 @@ def lab_room():
             print bcolors.BLUE + '''
     -----------------------------------------
     | You feel a fire inside you.           |
-    | This was not good idea to drink       |
+    | This was not a good idea to drink     |
     | a potion in sorcerer's room...        |
     -----------------------------------------
         ''' + bcolors.END
@@ -240,6 +240,14 @@ def lab_room():
     ''' + bcolors.END
             damage()
             start()
+        elif "red" in choice:
+            print bcolors.BLUE + '''
+    ---------
+    | BOOM! |
+    ---------
+            ''' + bcolors.END
+            damage()
+            start()
         elif "mix" and ("blue" and "green") in choice:
             print bcolors.BLUE + '''
     ---------------------------
@@ -247,22 +255,6 @@ def lab_room():
     ---------------------------
     ''' + bcolors.END
             monster_room1()
-        elif "mix" and ("red" or "blue") in choice:
-            print bcolors.BLUE + '''
-    ---------
-    | BOOM! |
-    ---------
-            ''' + bcolors.END
-            damage()
-            start()
-        elif "mix" and ("red" or "green") in choice:
-            print bcolors.BLUE + '''
-    ---------
-    | BOOM! |
-    ---------
-            ''' + bcolors.END
-            damage()
-            start()
         elif "inventory" in choice:
             check_invent()
             lab_room()
@@ -309,6 +301,7 @@ def monster_room1():
         print '''
         You're in the monster_room1
         '''
+        exit(0)
 
 def puzzle_room2():
     tip_rand()
