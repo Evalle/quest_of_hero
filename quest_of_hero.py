@@ -78,7 +78,7 @@ def choice_gold_room():
     if "right" in another_choice:
         lab_room()
     elif "center" in another_choice:
-        puzzle_room1()
+        puzzle_room()
     elif "back" in another_choice:
         start()
     elif "inventory" in another_choice:
@@ -134,6 +134,13 @@ def start():
     ---------------------------
     ''' + bcolors.END
             start()
+
+def cant_understand():
+    print bcolors.RED + '''
+---------------------------
+| I can't understand you! |
+---------------------------
+''' + bcolors.END
 
 def gold_room():
     tip_rand()
@@ -254,7 +261,7 @@ def lab_room():
     | Walls are dissapeared...|
     ---------------------------
     ''' + bcolors.END
-            monster_room1()
+            monster_room()
         elif "inventory" in choice:
             check_invent()
             lab_room()
@@ -280,7 +287,7 @@ def lab_room():
     ''' + bcolors.END
             lab_room()
 
-def puzzle_room1():
+def puzzle_room():
     tip_rand()
     global lives
 
@@ -288,10 +295,50 @@ def puzzle_room1():
         dead()
     else:
         print '''
-        You're in the puzzle_room1
+    -----------------------------------------------
+    | Door is suddenly closed behind you          |
+    | You can hear strange voice, it whispers     |
+    | "If EELS + MARK + BEST + WARY = EASY        |
+    | What does HELP + BARK + WARD + LEAD equal?" |
+    -----------------------------------------------
         '''
+    choice = raw_input('> Your answer: ')
 
-def monster_room1():
+    # positive:
+    if choice == "HARD":
+        print bcolors.BLUE '''
+    ----------------------------------------------------
+    | Walls are disspapeared, you can see two doors    |
+    | one in the center, another in the right from you |
+    | which one you will choose?                       |
+    ----------------------------------------------------
+    ''' + bcolors.END
+        another_choice = raw_input('> Choose the door: ')
+
+        # go to final room
+        if another_choice == 'center':
+            boss_room()
+        elif another_choice == 'right':
+            monster_room()
+        elif another_choice == 'exit':
+            exit(0)
+        else:
+            print "You can't do that!"
+    elif "inventory" in choice:
+        check_invent()
+        lab_room()
+    elif "lives" in choice:
+        check_lives()
+        lab_room()
+    elif "back" in choice and not inventory:
+        turn_back(start())
+    elif "exit" in choice:
+        exit(0)
+    else:
+        cant_understand()
+        puzzle_room()
+
+def monster_room():
     tip_rand()
     global lives
 
@@ -299,11 +346,11 @@ def monster_room1():
         dead()
     else:
         print '''
-        You're in the monster_room1
+        You're in the monster_room
         '''
         exit(0)
 
-def puzzle_room2():
+def boss_room():
     tip_rand()
     global lives
 
@@ -311,18 +358,7 @@ def puzzle_room2():
         dead()
     else:
         print '''
-        You're in the puzzle room
-        '''
-
-def monster_room2():
-    tip_rand()
-    global lives
-
-    if lives == 0:
-        dead()
-    else:
-        print '''
-        You're in the puzzle room
+        You're in the bosse's room
         '''
 
 # start the game
