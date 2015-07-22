@@ -211,7 +211,7 @@ def lab_room():
     | You're in the Great Sorcerer's labaratory.                            |
     | You see a lot of interesting stuff here.                              |
     | Bat wings, skulls, and old books with strange sparkly names on them.  |
-    | On the big table you can see three poitions:                          |
+    | On the big table you can see three potions:                          |
     | o A blue one.                                                         |
     | o A green one.                                                        |
     | o And a red one.                                                      |
