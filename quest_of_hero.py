@@ -18,6 +18,7 @@ tip1 = "\nTIP: To check your inventory type 'inventory'\n"
 tip2 = "\nTIP: To check your lives type 'lives'\n"
 tip3 = "\nTIP: To return to your previous location type 'back'\n"
 tip4 = "\nTIP: To exit the game type 'exit'\n"
+
 welcome_messsage = (bcolors.HEADER + "\n>>> Welcome to the Quest of Hero! <<<" + bcolors.END)
 
 # lists
@@ -67,74 +68,53 @@ def damage():
     lives = lives - 1
     return lives
 
-def cant_understand():
+def info_cant_understand():
     print bcolors.RED + '''
     ---------------------------
     | I can't understand you! |
     ---------------------------
     ''' + bcolors.END
 
-def cant_doit():
+def info_cant_dothat():
     print bcolors.RED + '''
-    --------------------
-    | You can't do it! |
-    --------------------
+    ----------------------
+    | You can't do that! |
+    ----------------------
     ''' + bcolors.END
 
-def choose_your_door():
+def info_choose_door():
     print bcolors.RED + '''
     -----------------------------
     | Please, choose your door! |
     -----------------------------
     ''' + bcolors.END
 
-def choice_gold_room():
+def choice_new_room(direction, door1, door2):
     print '''
     --------------------------------------------------------------------------
     | The room became lighter, now you can see two doors, one in the center, |
-    | another in the right from you. Which one you will choose?              |
+    | another in the''' + direction + '''from you. Which one you will choose?|
     --------------------------------------------------------------------------
     '''
     another_choice = raw_input("> Make your choice: ")
-    if "right" in another_choice:
-        lab_room()
+    if direction in another_choice:
+        door1
     elif "center" in another_choice:
-        puzzle_room()
+        door2
     elif "back" in another_choice:
-        cant_doit()
-        choice_gold_room()
+        info_cant_dothat()
+        choice_new_room(direction, door1, door2)
     elif "inventory" in another_choice:
         check_invent()
-        choice_gold_room()
+        choice_new_room(direction, door1, door2)
     elif "lives" in another_choice:
         check_lives()
-        choice_gold_room()
+        choice_new_room(direction, door1, door2)
     elif "exit" in another_choice:
         exit(0)
     else:
-        choose_your_door()
-        choice_gold_room()
-
-def choice_puzzle_room():
-    print bcolors.BLUE + '''
-    ----------------------------------------------------
-    | Walls are disspapeared, you can see two doors    |
-    | one in the center, another in the right from you |
-    | which one you will choose?                       |
-    ----------------------------------------------------
-    ''' + bcolors.END
-    another_choice = raw_input('> Choose the door: ')
-
-    # go to final room
-    if another_choice == 'center':
-        boss_room()
-    elif another_choice == 'right':
-        monster_room()
-    elif another_choice == 'exit':
-        exit(0)
-    else:
-        cant_doit()
-        choice_lab_room()
+        info_choose_door()
+        choice_new_room(direction, door1, door2)
 
 def start():
     tip_rand()
@@ -154,7 +134,7 @@ def start():
     '''
         choice = raw_input('> Choose your door (left or right): ')
 
-        if "left" in choice:
+        if "left" in choice and not inventory:
             gold_room()
         elif "right" in choice:
             lab_room()
@@ -169,7 +149,7 @@ def start():
         elif "back" in choice:
             turn_back(start())
         else:
-            choose_your_door()
+            info_cant_dothat()
             start()
 
 def gold_room():
@@ -208,7 +188,7 @@ def gold_room():
     | Now you have the sword, good job! |
     -------------------------------------
             ''' + bcolors.END
-            choice_gold_room()
+            choice_new_room(" right ", lab_room(), puzzle_room())
         elif "take" and "shield" in choice:
             inventory.append('shield')
             print bcolors.BLUE + '''
@@ -216,7 +196,7 @@ def gold_room():
     | Now you have the shield, good job! |
     --------------------------------------
             ''' + bcolors.END
-            choice_gold_room()
+            choice_new_room(" right ", lab_room(), puzzle_room())
         elif "inventory" in choice:
             check_invent()
             gold_room()
@@ -228,7 +208,7 @@ def gold_room():
         elif "exit" in choice:
             exit(0)
         else:
-            cant_understand()
+            info_cant_understand()
             gold_room()
 
 def lab_room():
@@ -287,7 +267,7 @@ def lab_room():
     | Walls are dissapeared...|
     ---------------------------
     ''' + bcolors.END
-            monster_room()
+            choice_new_room(" left ", gold_room(), monster_room())
         elif "inventory" in choice:
             check_invent()
             lab_room()
@@ -299,14 +279,10 @@ def lab_room():
         elif "exit" in choice:
             exit(0)
         elif "back" in choice and 'shield' or 'sword' in inventory:
-            print bcolors.BLUE + '''
-    ------------------------------------
-    | It's strange, but door is closed |
-    ------------------------------------
-            ''' + bcolors.END
+            cant_do_that()
             lab_room()
         else:
-            cant_understand()
+            info_cant_understand()
             lab_room()
 
 def puzzle_room():
@@ -329,8 +305,7 @@ def puzzle_room():
 
     # positive:
     if choice == "HARD":
-        choice_puzzle_room()
-
+        choice_new_room(" right ", boss_room(), monster_room())
     elif "inventory" in choice:
         check_invent()
         lab_room()
@@ -338,12 +313,12 @@ def puzzle_room():
         check_lives()
         lab_room()
     elif "back" in choice:
-        cant_doit()
+        info_cant_dothat()
         puzzle_room()
     elif "exit" in choice:
         exit(0)
     else:
-        cant_understand()
+        info_cant_understand()
         puzzle_room()
 
 def monster_room():
