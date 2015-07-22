@@ -1,10 +1,8 @@
 - [X] Finish lab_room();
 - [X] Finish gold_room();
-- [ ] Add puzzle_room1();
-- [ ] Add monster_room1();
-- [ ] Add puzzle_room2();
-- [ ] Add monster_room2();
+- [ ] Add puzzle_room();
+- [ ] Add monster_room();
 - [ ] Add boss_room();
 - [X] Fix an issue with double taking sword or shield;
 - [ ] Rewrite main script by using the module architecture;
-- [ ] Add a timer to the puzzle room 1
+- [ ] OPTIONAL - Add a timer to the puzzle room 1;

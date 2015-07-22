@@ -80,7 +80,12 @@ def choice_gold_room():
     elif "center" in another_choice:
         puzzle_room()
     elif "back" in another_choice:
-        start()
+        print bcolors.RED + '''
+    ----------------------
+    | You can't do that! |
+    ----------------------
+        ''' + bcolors.END
+        choice_gold_room()
     elif "inventory" in another_choice:
         check_invent()
         choice_gold_room()
@@ -198,11 +203,7 @@ def gold_room():
         elif "exit" in choice:
             exit(0)
         else:
-            print bcolors.BLUE + '''
-    ---------------------------
-    | I can't understand you! |
-    ---------------------------
-            ''' + bcolors.END
+            cant_understand()
             gold_room()
 
 def lab_room():
@@ -280,11 +281,7 @@ def lab_room():
             ''' + bcolors.END
             lab_room()
         else:
-            print bcolors.RED + '''
-    ---------------------------
-    | I can't understand you! |
-    ---------------------------
-    ''' + bcolors.END
+            cant_understand()
             lab_room()
 
 def puzzle_room():
@@ -296,7 +293,8 @@ def puzzle_room():
     else:
         print '''
     -----------------------------------------------
-    | Door is suddenly closed behind you          |
+    | You walked into a new room.                 |
+    | Door is suddenly closed behind you.         |
     | You can hear strange voice, it whispers     |
     | "If EELS + MARK + BEST + WARY = EASY        |
     | What does HELP + BARK + WARD + LEAD equal?" |
@@ -306,7 +304,7 @@ def puzzle_room():
 
     # positive:
     if choice == "HARD":
-        print bcolors.BLUE '''
+        print bcolors.BLUE + '''
     ----------------------------------------------------
     | Walls are disspapeared, you can see two doors    |
     | one in the center, another in the right from you |
