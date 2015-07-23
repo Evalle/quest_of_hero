@@ -89,32 +89,20 @@ def info_choose_door():
     -----------------------------
     ''' + bcolors.END
 
-def choice_new_room(direction, door1, door2):
+def choose_room(direction, door1):
     print '''
-    --------------------------------------------------------------------------
-    | The room became lighter, now you can see two doors, one in the center, |
-    | another in the''' + direction + '''from you. Which one you will choose?|
-    --------------------------------------------------------------------------
+    -----------------------------------------------------------------------------
+    | The room became lighter, now you can see two doors, one in the center,    |
+    | another in the ''' + direction + ''' from you. Which one you will choose? |
+    -----------------------------------------------------------------------------
     '''
     another_choice = raw_input("> Make your choice: ")
     if direction in another_choice:
+        print "It actually works"
         door1
-    elif "center" in another_choice:
-        door2
-    elif "back" in another_choice:
-        info_cant_dothat()
-        choice_new_room(direction, door1, door2)
-    elif "inventory" in another_choice:
-        check_invent()
-        choice_new_room(direction, door1, door2)
-    elif "lives" in another_choice:
-        check_lives()
-        choice_new_room(direction, door1, door2)
-    elif "exit" in another_choice:
-        exit(0)
     else:
         info_choose_door()
-        choice_new_room(direction, door1, door2)
+        choose_room(direction)
 
 def start():
     tip_rand()
@@ -188,7 +176,7 @@ def gold_room():
     | Now you have the sword, good job! |
     -------------------------------------
             ''' + bcolors.END
-            choice_new_room(" right ", lab_room(), puzzle_room())
+            choose_room("right",lab_room)
         elif "take" and "shield" in choice:
             inventory.append('shield')
             print bcolors.BLUE + '''
@@ -196,7 +184,7 @@ def gold_room():
     | Now you have the shield, good job! |
     --------------------------------------
             ''' + bcolors.END
-            choice_new_room(" right ", lab_room(), puzzle_room())
+            choose_room("right",lab_room)
         elif "inventory" in choice:
             check_invent()
             gold_room()
@@ -224,7 +212,7 @@ def lab_room():
     | You're in the Great Sorcerer's labaratory.                            |
     | You see a lot of interesting stuff here.                              |
     | Bat wings, skulls, and old books with strange sparkly names on them.  |
-    | On the big table you can see three potions:                          |
+    | On the big table you can see three potions:                           |
     | o A blue one.                                                         |
     | o A green one.                                                        |
     | o And a red one.                                                      |
