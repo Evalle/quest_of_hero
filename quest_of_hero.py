@@ -13,7 +13,7 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 # variables
-lives = 2
+lives = 3
 tip1 = "\nTIP: To check your inventory type 'inventory'\n"
 tip2 = "\nTIP: To check your lives type 'lives'\n"
 tip3 = "\nTIP: To return to your previous location type 'back'\n"
@@ -24,7 +24,7 @@ welcome_messsage = (bcolors.HEADER + "\n>>> Welcome to the Quest of Hero! <<<" +
 
 # lists
 tips = [tip1, tip2, tip3, tip4, tip5]
-inventory = ['health potion']
+inventory = []
 
 # this function is for hero's inventory checking
 def check_invent():
@@ -211,10 +211,9 @@ def gold_room():
     -----------------------------------------------
     | You're in the gold room.                    |
     | It's full of gold coins,                    |
-    | In front of you there are two big statues.  |
-    | You can feel that they're watching you.     |
-    | One of the statues has a sword.             |
-    | Another one has a shield.                   |
+    | In front of you there are big statue.       |
+    | You can feel that it's watching you.        |
+    | Statues has a sword.                        |
     | What will you do?                           |
     -----------------------------------------------
         '''
@@ -235,14 +234,6 @@ def gold_room():
     -------------------------------------
     | Now you have the sword, good job! |
     -------------------------------------
-            ''' + bcolors.END
-            choose_room_gold("right")
-        elif "take" and "shield" in choice:
-            inventory.append('shield')
-            print bcolors.BLUE + '''
-    --------------------------------------
-    | Now you have the shield, good job! |
-    --------------------------------------
             ''' + bcolors.END
             choose_room_gold("right")
         elif "inventory" in choice:
@@ -387,15 +378,52 @@ def monster_room():
     else:
         print '''
     -----------------------------------------------
-    | You walked into a new room.                 |
-    | Door is suddenly closed behind you.         |
-    | It's reaaaally stinks here                  |
+    | First thing that you thought was:           |
+    | "It's reaaaally stinks here", and it's true:|
     | You can see a huge green goblin in the room |
-    | He's looks really sick and angry            |
+    | He looks really sick and little angry       |
     | What will you do?                           |
     -----------------------------------------------
         '''
-        exit(0)
+        choice = raw_input("> Make your choice: ")
+        if 'health potion' in inventory and "give" and 'health potion' in choice:
+            inventory.remove('health potion')
+            print '''
+    ------------------------------------------------------------
+    | Goblin looks happy, 'U clan gou tu bos rom naw', he said |
+    ------------------------------------------------------------
+            '''
+            boss_room()
+        elif 'sword' in inventory and 'beat' in choice:
+            print '''
+    ------------------------------------------------------------
+    | Goblin cry in pain, 'U clan gou tu bos rom naw', he said |
+    ------------------------------------------------------------
+    '''
+            boss_room()
+        elif "inventory" in choice:
+            check_invent()
+            monster_room()
+        elif "lives" in choice:
+            check_lives()
+            monster_room()
+        elif "heal" in choice:
+            heal()
+            monster_room()
+        elif "back" in choice:
+            info_cant_dothat()
+            monster_room()
+        elif "exit" in choice:
+            exit(0)
+        else:
+            print bcolors.RED + '''
+    --------------------------------------------
+    | Your decision freakin' out green goblin, |
+    | he beats you with his axe                |
+    --------------------------------------------
+        ''' + bcolors.END
+        damage()
+        start()
 
 def boss_room():
     tip_rand()
@@ -405,7 +433,7 @@ def boss_room():
         dead()
     else:
         print '''
-        You're in the bosse's room
+        You see main boss, the Evil one
         '''
 
 # start the game
