@@ -13,7 +13,7 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 # variables
-lives = 3
+lives = 2
 tip1 = "\nTIP: To check your inventory type 'inventory'\n"
 tip2 = "\nTIP: To check your lives type 'lives'\n"
 tip3 = "\nTIP: To return to your previous location type 'back'\n"
@@ -24,7 +24,7 @@ welcome_messsage = (bcolors.HEADER + "\n>>> Welcome to the Quest of Hero! <<<" +
 
 # lists
 tips = [tip1, tip2, tip3, tip4, tip5]
-inventory = []
+inventory = ['health potion']
 
 # this function is for hero's inventory checking
 def check_invent():
@@ -127,6 +127,9 @@ def choose_room_gold(direction):
         gold_room()
     elif "exit" in another_choice:
         exit(0)
+    elif "heal" in another_choice:
+        heal()
+        choose_room_gold(direction)
     else:
         info_choose_door()
         choose_room_gold(direction)
@@ -151,6 +154,9 @@ def choose_room_puzzle(direction):
         gold_room()
     elif "exit" in another_choice:
         exit(0)
+    elif "heal" in another_choice:
+        heal()
+        choose_room_puzzle(direction)
     else:
         info_choose_door()
         choose_room_puzzle(direction)
@@ -247,6 +253,9 @@ def gold_room():
             gold_room()
         elif "back" in choice:
             turn_back(start())
+        elif "heal" in choice:
+            heal()
+            gold_room()
         elif "exit" in choice:
             exit(0)
         else:
@@ -316,6 +325,9 @@ def lab_room():
         elif "lives" in choice:
             check_lives()
             lab_room()
+        elif "heal" in choice:
+            heal()
+            lab_room()
         elif "back" in choice and not inventory:
             turn_back(start())
         elif "exit" in choice:
@@ -350,10 +362,13 @@ def puzzle_room():
         choice_new_room("right")
     elif "inventory" in choice:
         check_invent()
-        lab_room()
+        puzzle_room()
     elif "lives" in choice:
         check_lives()
-        lab_room()
+        puzzle_room()
+    elif "heal" in choice:
+        heal()
+        puzzle_room()
     elif "back" in choice:
         info_cant_dothat()
         puzzle_room()
