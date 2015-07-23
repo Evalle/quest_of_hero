@@ -18,11 +18,12 @@ tip1 = "\nTIP: To check your inventory type 'inventory'\n"
 tip2 = "\nTIP: To check your lives type 'lives'\n"
 tip3 = "\nTIP: To return to your previous location type 'back'\n"
 tip4 = "\nTIP: To exit the game type 'exit'\n"
+tip5 = "\nTIP: To drink health potion type 'heal'\n"
 
 welcome_messsage = (bcolors.HEADER + "\n>>> Welcome to the Quest of Hero! <<<" + bcolors.END)
 
 # lists
-tips = [tip1, tip2, tip3, tip4]
+tips = [tip1, tip2, tip3, tip4, tip5]
 inventory = []
 
 # this function is for hero's inventory checking
@@ -36,6 +37,22 @@ def check_invent():
             print bcolors.YELLOW + '''
     >>> You have the %r in your inventory <<<
             ''' % i + bcolors.END
+
+def heal():
+    global lives
+    global inventory
+
+    if "health potion" not in inventory:
+        print bcolors.YELLOW + '''
+    >>> Sorry, you don't have health potion <<<<
+    ''' + bcolors.END
+    elif lives == 3 and "health potion" in inventory:
+        print bcolors.YELLOW + '''
+    >>> Sorry, your health is full <<<<
+    ''' + bcolors.END
+    else:
+        lives += 1
+        inventory.remove("health potion")
 
 # this function is for hero's lives checking
 def check_lives():
@@ -170,6 +187,9 @@ def start():
             exit(0)
         elif "back" in choice:
             turn_back(start())
+        elif "heal" in choice:
+            heal()
+            start()
         else:
             info_cant_dothat()
             start()
@@ -346,11 +366,19 @@ def puzzle_room():
 def monster_room():
     tip_rand()
     global lives
+
     if lives == 0:
         dead()
     else:
         print '''
-        You're in the monster_room
+    -----------------------------------------------
+    | You walked into a new room.                 |
+    | Door is suddenly closed behind you.         |
+    | It's reaaaally stinks here                  |
+    | You can see a huge green goblin in the room |
+    | He's looks really sick and angry            |
+    | What will you do?                           |
+    -----------------------------------------------
         '''
         exit(0)
 
