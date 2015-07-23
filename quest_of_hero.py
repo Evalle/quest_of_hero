@@ -208,23 +208,23 @@ def gold_room():
         dead()
     else:
         print '''
-    -----------------------------------------------
-    | You're in the gold room.                    |
-    | It's full of gold coins,                    |
-    | In front of you there are big statue.       |
-    | You can feel that it's watching you.        |
-    | Statues has a sword.                        |
-    | What will you do?                           |
-    -----------------------------------------------
+    ----------------------------------------
+    | You're in the gold room.             |
+    | It's full of gold coins,             |
+    | In front of you there's a big statue.|
+    | You can feel that it's watching you. |
+    | Statue has a sword.                  |
+    | What will you do?                    |
+    ----------------------------------------
         '''
         choice = raw_input("> Make your choice: ")
 
         if "coin" in choice:
             print bcolors.BLUE + '''
-    --------------------------------------------------------------
-    | You feel that floor is going down from over your feet.     |
-    | You falling down into darkness...                          |
-    --------------------------------------------------------------
+    ---------------------------------------------------------
+    | You feel that floor is going down from over your feet.|
+    | You falling down into darkness...                     |
+    ---------------------------------------------------------
             ''' + bcolors.END
             damage()
             start()
@@ -305,10 +305,12 @@ def lab_room():
             start()
         elif "mix" and ("blue" and "green") in choice:
             print bcolors.BLUE + '''
-    ---------------------------
-    | Walls are dissapeared...|
-    ---------------------------
+    --------------------------------------------------
+    | Walls are dissapeared...                       |
+    | And... you have a health potion now, good job! |
+    --------------------------------------------------
     ''' + bcolors.END
+            inventory.append('health potion')
             monster_room()
         elif "inventory" in choice:
             check_invent()
@@ -350,7 +352,7 @@ def puzzle_room():
 
     # positive:
     if choice == "HARD":
-        choice_new_room("right")
+        choose_room_puzzle("right")
     elif "inventory" in choice:
         check_invent()
         puzzle_room()
@@ -394,11 +396,13 @@ def monster_room():
     ------------------------------------------------------------
             '''
             boss_room()
-        elif 'sword' in inventory and 'beat' in choice:
+        elif 'sword' in inventory and 'beat' and 'sword' in choice:
+            inventory.remove('sword')
             print '''
-    ------------------------------------------------------------
-    | Goblin cry in pain, 'U clan gou tu bos rom naw', he said |
-    ------------------------------------------------------------
+    ---------------------------------------------------------------------------
+    | After your hit Goblin cry in pain, 'U clan gou tu bos rom naw', he said |
+    | Unfortunately, your sword is broken now. Anyway it was really old       |
+    ---------------------------------------------------------------------------
     '''
             boss_room()
         elif "inventory" in choice:
@@ -422,8 +426,8 @@ def monster_room():
     | he beats you with his axe                |
     --------------------------------------------
         ''' + bcolors.END
-        damage()
-        start()
+            damage()
+            start()
 
 def boss_room():
     tip_rand()
