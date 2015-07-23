@@ -276,7 +276,7 @@ def lab_room():
             damage()
             start()
         elif "red" in choice:
-            print bcolors.BLUE + '''
+            print bcolors.RED + '''
     ---------
     | BOOM! |
     ---------
@@ -289,7 +289,7 @@ def lab_room():
     | Walls are dissapeared...|
     ---------------------------
     ''' + bcolors.END
-            choice_new_room(" left ", gold_room(), monster_room())
+            monster_room()
         elif "inventory" in choice:
             check_invent()
             lab_room()
@@ -301,7 +301,7 @@ def lab_room():
         elif "exit" in choice:
             exit(0)
         elif "back" in choice and 'shield' or 'sword' in inventory:
-            cant_do_that()
+            info_cant_do_that()
             lab_room()
         else:
             info_cant_understand()
@@ -346,7 +346,6 @@ def puzzle_room():
 def monster_room():
     tip_rand()
     global lives
-
     if lives == 0:
         dead()
     else:
