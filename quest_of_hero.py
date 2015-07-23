@@ -89,7 +89,8 @@ def info_choose_door():
     -----------------------------
     ''' + bcolors.END
 
-def choose_room(direction, door1):
+# I really don't like code here, it's not universal :\
+def choose_room_gold(direction):
     print '''
     -----------------------------------------------------------------------------
     | The room became lighter, now you can see two doors, one in the center,    |
@@ -98,11 +99,44 @@ def choose_room(direction, door1):
     '''
     another_choice = raw_input("> Make your choice: ")
     if direction in another_choice:
-        print "It actually works"
-        door1
+        lab_room()
+    elif "center" in another_choice:
+        puzzle_room()
+    elif "back" in another_choice:
+        info_cant_dothat()
+        choose_room_gold(direction)
+    elif "lives" in another_choice:
+        check_lives()
+        gold_room()
+    elif "exit" in another_choice:
+        exit(0)
     else:
         info_choose_door()
-        choose_room(direction)
+        choose_room_gold(direction)
+
+def choose_room_puzzle(direction):
+    print '''
+    -----------------------------------------------------------------------------
+    | The room became lighter, now you can see two doors, one in the center,    |
+    | another in the ''' + direction + ''' from you. Which one you will choose? |
+    -----------------------------------------------------------------------------
+    '''
+    another_choice = raw_input("> Make your choice: ")
+    if direction in another_choice:
+        monster_room()
+    elif "center" in another_choice:
+        boss_room()
+    elif "back" in another_choice:
+        info_cant_dothat()
+        choose_room_puzzle(direction)
+    elif "lives" in another_choice:
+        check_lives()
+        gold_room()
+    elif "exit" in another_choice:
+        exit(0)
+    else:
+        info_choose_door()
+        choose_room_puzzle(direction)
 
 def start():
     tip_rand()
@@ -176,7 +210,7 @@ def gold_room():
     | Now you have the sword, good job! |
     -------------------------------------
             ''' + bcolors.END
-            choose_room("right",lab_room)
+            choose_room_gold("right")
         elif "take" and "shield" in choice:
             inventory.append('shield')
             print bcolors.BLUE + '''
@@ -184,7 +218,7 @@ def gold_room():
     | Now you have the shield, good job! |
     --------------------------------------
             ''' + bcolors.END
-            choose_room("right",lab_room)
+            choose_room_gold("right")
         elif "inventory" in choice:
             check_invent()
             gold_room()
@@ -293,7 +327,7 @@ def puzzle_room():
 
     # positive:
     if choice == "HARD":
-        choice_new_room(" right ", boss_room(), monster_room())
+        choice_new_room("right")
     elif "inventory" in choice:
         check_invent()
         lab_room()
