@@ -1,7 +1,7 @@
 - [X] Finish lab_room();
 - [X] Finish gold_room();
 - [X] Add puzzle_room();
-- [ ] Add monster_room();
+- [X] Add monster_room();
 - [ ] Add boss_room();
 - [X] Fix an issue with double taking sword or shield;
 - [ ] Rewrite main script by using the module architecture;
