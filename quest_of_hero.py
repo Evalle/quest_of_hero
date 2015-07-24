@@ -396,7 +396,7 @@ def monster_room():
     ------------------------------------------------------------
             '''
             boss_room()
-        elif 'sword' in inventory and 'beat' and 'sword' in choice:
+        elif 'sword' in inventory and ('beat' and 'sword') in choice:
             inventory.remove('sword')
             print '''
     ---------------------------------------------------------------------------
@@ -421,10 +421,10 @@ def monster_room():
             exit(0)
         else:
             print bcolors.RED + '''
-    --------------------------------------------
-    | Your decision freakin' out green goblin, |
-    | he beats you with his axe                |
-    --------------------------------------------
+    ------------------------------------------------
+    | Your decision freakin' out green goblin:     |
+    | 'Aaaaarrrrggghhh!' he beats you with his axe |
+    -------------------------------------------------
         ''' + bcolors.END
             damage()
             start()
