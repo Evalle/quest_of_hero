@@ -454,15 +454,30 @@ def boss_room():
         '''
         if lives < 3:
             print bcolors.RED + '''
-    --------------------------
-    | "Hah! You're so weak!" |
-    | Main boss smashed your |
-    | face with his axe      |
-    --------------------------
+    -------------------------------
+    | "Hah! You're so weak!"      |
+    | Cried Main boss and smashed |
+    | your face with his axe      |
+    -------------------------------
         ''' + bcolors.END
             dead()
+        elif "inventory" in choice:
+            check_invent()
+            monster_room()
+        elif "lives" in choice:
+            check_lives()
+            monster_room()
+        elif "heal" in choice:
+            heal()
+            monster_room()
+        elif "back" in choice:
+            info_cant_dothat()
+            monster_room()
+        elif "exit" in choice:
+            exit(0)
         else:
-            print "Else"
+            # some action here
+
 # start the game
 print welcome_messsage
 start()
