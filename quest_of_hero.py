@@ -437,9 +437,24 @@ def boss_room():
         dead()
     else:
         print '''
-        You see main boss, the Evil one
+    -------------------------------------------------------------------------
+    | You're in the large dark hall, there almost no light here.            |
+    | In the end of the hall, you can see the Main Boss, the Evil one       |
+    | "Hello, 'hero'" he said. "To defeat me you must have all you strength"|
+    | "But you already knew it, right"?                                     |
+    -------------------------------------------------------------------------
         '''
-
+        if lives < 3:
+            print bcolors.RED + '''
+    --------------------------
+    | "Hah! You're so weak!" |
+    | Main boss smashed your |
+    | face with his axe      |
+    --------------------------
+        ''' + bcolors.END
+        dead()
+        else:
+            print "Else"
 # start the game
 print welcome_messsage
 start()
