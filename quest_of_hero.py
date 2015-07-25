@@ -304,14 +304,22 @@ def lab_room():
             damage()
             start()
         elif "mix" and ("blue" and "green") in choice:
-            print bcolors.BLUE + '''
-    --------------------------------------------------
-    | Walls are dissapeared...                       |
-    | And... you have a health potion now, good job! |
-    --------------------------------------------------
-    ''' + bcolors.END
-            inventory.append('health potion')
-            monster_room()
+            if 'health potion' in inventory:
+                print bcolors.BLUE + '''
+        --------------------------------------------------
+        | Walls are dissapeared...                       |
+        --------------------------------------------------
+        ''' + bcolors.END
+                monster_room()
+            else:
+                print bcolors.BLUE + '''
+        --------------------------------------------------
+        | Walls are dissapeared...                       |
+        | And... you have a health potion now, good job! |
+        --------------------------------------------------
+        ''' + bcolors.END
+                inventory.append('health potion')
+                monster_room()
         elif "inventory" in choice:
             check_invent()
             lab_room()
@@ -452,7 +460,7 @@ def boss_room():
     | face with his axe      |
     --------------------------
         ''' + bcolors.END
-        dead()
+            dead()
         else:
             print "Else"
 # start the game
