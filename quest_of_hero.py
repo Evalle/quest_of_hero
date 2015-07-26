@@ -14,6 +14,7 @@ class bcolors:
 
 # variables
 lives = 3
+boss_lives = 2
 tip1 = "\nTIP: To check your inventory type 'inventory'\n"
 tip2 = "\nTIP: To check your lives type 'lives'\n"
 tip3 = "\nTIP: To return to your previous location type 'back'\n"
@@ -440,19 +441,47 @@ def monster_room():
 def boss_room():
     tip_rand()
     global lives
+    global boss_lives = 2
 
     if lives == 0:
         dead()
     else:
         print '''
     -------------------------------------------------------------------------
-    | You're in the large dark hall, almost no light here...                |
+    | You're in the large dark hall,                                        |
     | In the end of the hall, you can see the Main Boss, the Evil one       |
     | "Hello, 'hero'" he said. "You must have all you strength to defeat me"|
-    | "But you already know it, right"?                                     |
+    | "But you already knew it, right"?                                     |
     -------------------------------------------------------------------------
         '''
-        if lives < 3:
+
+        if lives == 3:
+            print '''
+    ------------------------------------------------------------------------------
+    | "Alright, you're strong enough for me, But what will you do, little hero?" |
+    | - said Evil One and jumped to you with his black axe                       |
+    ------------------------------------------------------------------------------
+    '''
+            choice = raw_input("> Your action: ")
+
+
+
+            elif "inventory" in choice:
+                check_invent()
+                monster_room()
+            elif "lives" in choice:
+                check_lives()
+                monster_room()
+            elif "heal" in choice:
+                heal()
+                monster_room()
+            elif "back" in choice:
+                info_cant_dothat()
+                monster_room()
+            elif "exit" in choice:
+                exit(0)
+            else:
+        else:
             print bcolors.RED + '''
     -------------------------------
     | "Hah! You're so weak!" -    |
@@ -461,21 +490,7 @@ def boss_room():
     -------------------------------
         ''' + bcolors.END
             dead()
-        elif "inventory" in choice:
-            check_invent()
-            monster_room()
-        elif "lives" in choice:
-            check_lives()
-            monster_room()
-        elif "heal" in choice:
-            heal()
-            monster_room()
-        elif "back" in choice:
-            info_cant_dothat()
-            monster_room()
-        elif "exit" in choice:
-            exit(0)
-        else:
+
             # some action here
 
 # start the game
