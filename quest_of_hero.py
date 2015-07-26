@@ -87,14 +87,10 @@ def tip_rand():
 def turn_back(function):
     function()
 
-def damage():
+def damage(why):
     global lives
-    lives = lives - 1
-    print bcolors.RED + '''
-    >>> Oh, it hurts! <<<
-    >>> You bleeding! <<<
-    ''' + bcolors.END
-    return lives
+    lives -= 1
+    print bcolors.RED + why + " You're bleeding!" + bcolors.END
 
 def info_cant_understand():
     print bcolors.RED + '''
@@ -242,7 +238,7 @@ def gold_room():
     | You falling down into darkness...                     |
     ---------------------------------------------------------
             ''' + bcolors.END
-            damage()
+            damage('You fell down! ')
             start()
         elif "take" and "sword" in choice:
             inventory.append('sword')
@@ -298,7 +294,7 @@ def lab_room():
     | a potion in sorcerer's room...        |
     -----------------------------------------
         ''' + bcolors.END
-            damage()
+            damage("You're poisoned! ")
             start()
         elif "take" in choice:
             print bcolors.BLUE + '''
@@ -309,7 +305,7 @@ def lab_room():
     | He put a very powerful spell on you.              |
     -----------------------------------------------------
     ''' + bcolors.END
-            damage()
+            damage("You're on fire! ")
             start()
         elif "red" in choice:
             print bcolors.RED + '''
@@ -317,7 +313,7 @@ def lab_room():
     | BOOM! |
     ---------
             ''' + bcolors.END
-            damage()
+            damage("It was really powerful explosion! ")
             start()
         elif "mix" and ("blue" and "green") in choice:
             if 'health potion' in inventory:
@@ -393,11 +389,11 @@ def puzzle_room():
         exit(0)
     else:
         print bcolors.RED + '''
-    -------------------
-    | You're WRONG!!! |
-    -------------------
+    ---------------------
+    | "You're WRONG!!!" |
+    ---------------------
         ''' + bcolors.END
-        damage()
+        damage('You feel like a thousond nails are hurting you! ')
         start()
 
 def monster_room():
@@ -455,13 +451,13 @@ def monster_room():
     | 'Aaaaarrrrggghhh!' he beats you with his axe |
     -------------------------------------------------
         ''' + bcolors.END
-            damage()
+            damage("You can't feel your right hand! ")
             start()
 
 def boss_room():
     tip_rand()
     global lives
-    boss_lives = 2
+    boss_hurt = False
 
     if lives == 0:
         dead()
@@ -482,18 +478,20 @@ def boss_room():
     | - said Evil One and jumped to you with his black axe                       |
     ------------------------------------------------------------------------------
             '''
-            while boss_lives > 0:
+            while True:
                 choice = raw_input("> Your action: ")
 
                 if "sword" in choice and "sword" in inventory:
-                    boss_lives -= 1
                     print bcolors.BLUE + '''
     ---------------------------------
     | "hah! It's not enough for me! |
     | "Aaaaarrrrggghhh!"            |
     ---------------------------------
                     ''' + bcolors.END
+                    boss_hurt = True
                     lives -= 1
+                elif ("sword" in choice and "sword" in inventory) and boss_hurt:
+                    boss_dead()
                 elif "inventory" in choice:
                     check_invent()
                 elif "lives" in choice:
@@ -507,8 +505,7 @@ def boss_room():
                 elif lives == 1:
                     dead()
                 else:
-                    print "Congratulations!"
-                    boss_dead()
+                    damage("All your body hurts! ")
 
         else:
             print bcolors.RED + '''
