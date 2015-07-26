@@ -68,7 +68,7 @@ def check_lives():
 
 def dead():
     print bcolors.RED + '''
-    >>> You have no lives left, you're dead! <<<
+    >>> GAME OVER <<<
     ''' + bcolors.END
     exit(0)
 
@@ -446,17 +446,17 @@ def boss_room():
     else:
         print '''
     -------------------------------------------------------------------------
-    | You're in the large dark hall, there almost no light here.            |
+    | You're in the large dark hall, almost no light here...                |
     | In the end of the hall, you can see the Main Boss, the Evil one       |
-    | "Hello, 'hero'" he said. "To defeat me you must have all you strength"|
-    | "But you already knew it, right"?                                     |
+    | "Hello, 'hero'" he said. "You must have all you strength to defeat me"|
+    | "But you already know it, right"?                                     |
     -------------------------------------------------------------------------
         '''
         if lives < 3:
             print bcolors.RED + '''
     -------------------------------
-    | "Hah! You're so weak!"      |
-    | Cried Main boss and smashed |
+    | "Hah! You're so weak!" -    |
+    | cried Main boss and smashed |
     | your face with his axe      |
     -------------------------------
         ''' + bcolors.END
