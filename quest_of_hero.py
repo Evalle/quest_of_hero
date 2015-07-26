@@ -157,7 +157,7 @@ def choose_room_puzzle(direction):
         choose_room_puzzle(direction)
     elif "lives" in another_choice:
         check_lives()
-        gold_room()
+        choose_room_puzzle(direction)
     elif "exit" in another_choice:
         exit(0)
     elif "heal" in another_choice:
@@ -382,8 +382,13 @@ def puzzle_room():
     elif "exit" in choice:
         exit(0)
     else:
-        info_cant_understand()
-        puzzle_room()
+        print bcolors.RED + '''
+    -------------------
+    | You're WRONG!!! |
+    -------------------
+        ''' + bcolors.END
+        damage()
+        start()
 
 def monster_room():
     tip_rand()
