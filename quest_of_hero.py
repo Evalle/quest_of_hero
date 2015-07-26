@@ -472,14 +472,14 @@ def boss_room():
 
                 if "sword" in choice and "sword" in inventory:
                     boss_hurts = True
-                    print bcolors.BLUE '''
+                    print bcolors.BLUE + '''
     ---------------------------------
     | "hah! It's not enough for me! |
     | "Aaaaarrrrggghhh!"            |
     ---------------------------------
                     ''' + bcolors.END
 
-                elif ("sword" in choice and "sword" in inventory) and boss_hurts = True:
+                elif ("sword" in choice and "sword" in inventory) and boss_hurts == True:
                     boss_dead()
                 elif "inventory" in choice:
                     check_invent()
@@ -497,7 +497,7 @@ def boss_room():
                     exit(0)
                 else:
                     info_cant_understand()
-        else if lives < 3:
+        else:
             print bcolors.RED + '''
     -------------------------------
     | "Hah! You're so weak!" -    |
