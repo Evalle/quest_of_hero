@@ -14,7 +14,6 @@ class bcolors:
 
 # variables
 lives = 3
-boss_lives = 2
 tip1 = "\nTIP: To check your inventory type 'inventory'\n"
 tip2 = "\nTIP: To check your lives type 'lives'\n"
 tip3 = "\nTIP: To return to your previous location type 'back'\n"
@@ -70,6 +69,12 @@ def check_lives():
 def dead():
     print bcolors.RED + '''
     >>> GAME OVER <<<
+    ''' + bcolors.END
+    exit(0)
+
+def boss_dead():
+    print bcolors.GREEN + '''
+    >>> Congratulations! You defeat the Evil One! <<<
     ''' + bcolors.END
     exit(0)
 
@@ -441,7 +446,7 @@ def monster_room():
 def boss_room():
     tip_rand()
     global lives
-    global boss_lives = 2
+    boss_hurts = False
 
     if lives == 0:
         dead()
@@ -461,27 +466,38 @@ def boss_room():
     | "Alright, you're strong enough for me, But what will you do, little hero?" |
     | - said Evil One and jumped to you with his black axe                       |
     ------------------------------------------------------------------------------
-    '''
-            choice = raw_input("> Your action: ")
+            '''
+            while True:
+                choice = raw_input("> Your action: ")
 
+                if "sword" in choice and "sword" in inventory:
+                    boss_hurts = True
+                    print bcolors.BLUE '''
+    ---------------------------------
+    | "hah! It's not enough for me! |
+    | "Aaaaarrrrggghhh!"            |
+    ---------------------------------
+                    ''' + bcolors.END
 
-
-            elif "inventory" in choice:
-                check_invent()
-                monster_room()
-            elif "lives" in choice:
-                check_lives()
-                monster_room()
-            elif "heal" in choice:
-                heal()
-                monster_room()
-            elif "back" in choice:
-                info_cant_dothat()
-                monster_room()
-            elif "exit" in choice:
-                exit(0)
-            else:
-        else:
+                elif ("sword" in choice and "sword" in inventory) and boss_hurts = True:
+                    boss_dead()
+                elif "inventory" in choice:
+                    check_invent()
+                    monster_room()
+                elif "lives" in choice:
+                    check_lives()
+                    monster_room()
+                elif "heal" in choice:
+                    heal()
+                    monster_room()
+                elif "back" in choice:
+                    info_cant_dothat()
+                    monster_room()
+                elif "exit" in choice:
+                    exit(0)
+                else:
+                    info_cant_understand()
+        else if lives < 3:
             print bcolors.RED + '''
     -------------------------------
     | "Hah! You're so weak!" -    |
@@ -490,8 +506,6 @@ def boss_room():
     -------------------------------
         ''' + bcolors.END
             dead()
-
-            # some action here
 
 # start the game
 print welcome_messsage
