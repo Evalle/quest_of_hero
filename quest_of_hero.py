@@ -461,7 +461,7 @@ def monster_room():
 def boss_room():
     tip_rand()
     global lives
-    boss_hurts = False
+    boss_lives = 2
 
     if lives == 0:
         dead()
@@ -482,11 +482,11 @@ def boss_room():
     | - said Evil One and jumped to you with his black axe                       |
     ------------------------------------------------------------------------------
             '''
-            while True:
+            while boss_lives > 0:
                 choice = raw_input("> Your action: ")
 
                 if "sword" in choice and "sword" in inventory:
-                    boss_hurts = True
+                    boss_lives -= 1
                     print bcolors.BLUE + '''
     ---------------------------------
     | "hah! It's not enough for me! |
@@ -494,8 +494,6 @@ def boss_room():
     ---------------------------------
                     ''' + bcolors.END
                     lives -= 1
-                elif ("sword" in choice and "sword" in inventory) and boss_hurts == True:
-                    boss_dead()
                 elif "inventory" in choice:
                     check_invent()
                 elif "lives" in choice:
@@ -509,8 +507,9 @@ def boss_room():
                 elif lives == 1:
                     dead()
                 else:
-                    info_boss_said()
-                    damage()
+                    print "Congratulations!"
+                    boss_dead()
+
         else:
             print bcolors.RED + '''
     -------------------------------
