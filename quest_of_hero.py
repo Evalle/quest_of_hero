@@ -20,7 +20,7 @@ tip3 = "\nTIP: To return to your previous location type 'back'\n"
 tip4 = "\nTIP: To exit the game type 'exit'\n"
 tip5 = "\nTIP: To drink health potion type 'heal'\n"
 
-welcome_messsage = (bcolors.HEADER + "\n>>> Welcome to the Quest of Hero! <<<" + bcolors.END)
+welcome_messsage = bcolors.HEADER + "\n>>> Welcome to the Quest of Hero! <<<" + bcolors.END
 
 # lists
 tips = [tip1, tip2, tip3, tip4, tip5]
