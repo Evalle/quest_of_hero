@@ -68,7 +68,8 @@ def check_lives():
 
 def dead():
     print bcolors.RED + '''
-    >>> GAME OVER <<<
+    >>> You have no lives left  <<<
+    >>>       GAME OVER         <<<
     ''' + bcolors.END
     exit(0)
 
@@ -89,6 +90,10 @@ def turn_back(function):
 def damage():
     global lives
     lives = lives - 1
+    print bcolors.RED + '''
+    >>> Oh, it hurts! <<<
+    >>> You bleeding! <<<
+    ''' + bcolors.END
     return lives
 
 def info_cant_understand():
@@ -110,6 +115,11 @@ def info_choose_door():
     -----------------------------
     | Please, choose your door! |
     -----------------------------
+    ''' + bcolors.END
+
+def info_boss_said():
+    print bcolors.BLUE + '''
+    "Hah, you're full, you can't hurt me like this!"
     ''' + bcolors.END
 
 # I really don't like code here, it's not universal :\
@@ -409,11 +419,11 @@ def monster_room():
         choice = raw_input("> Make your choice: ")
         if 'health potion' in inventory and "give" and 'health potion' in choice:
             inventory.remove('health potion')
-            print '''
+            print bcolors.BLUE + '''
     ------------------------------------------------------------
     | Goblin looks happy, 'U clan gou tu bos rom naw', he said |
     ------------------------------------------------------------
-            '''
+            ''' + bcolors.END
             boss_room()
         elif 'sword' in inventory and ('beat' and 'sword') in choice:
             inventory.remove('sword')
@@ -483,25 +493,24 @@ def boss_room():
     | "Aaaaarrrrggghhh!"            |
     ---------------------------------
                     ''' + bcolors.END
-
+                    lives -= 1
                 elif ("sword" in choice and "sword" in inventory) and boss_hurts == True:
                     boss_dead()
                 elif "inventory" in choice:
                     check_invent()
-                    monster_room()
                 elif "lives" in choice:
                     check_lives()
-                    monster_room()
                 elif "heal" in choice:
                     heal()
-                    monster_room()
                 elif "back" in choice:
                     info_cant_dothat()
-                    monster_room()
                 elif "exit" in choice:
                     exit(0)
+                elif lives == 1:
+                    dead()
                 else:
-                    info_cant_understand()
+                    info_boss_said()
+                    damage()
         else:
             print bcolors.RED + '''
     -------------------------------
