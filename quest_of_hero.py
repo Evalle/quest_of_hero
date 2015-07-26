@@ -75,7 +75,7 @@ def dead():
 
 def boss_dead():
     print bcolors.GREEN + '''
-    >>> Congratulations! You defeat the Evil One! <<<
+    >>> Congratulations! You defeat the Evil One! Now all our great kingdom is safe! <<<
     ''' + bcolors.END
     exit(0)
 
@@ -90,7 +90,7 @@ def turn_back(function):
 def damage(why):
     global lives
     lives -= 1
-    print bcolors.RED + why + " You're bleeding!" + bcolors.END
+    print bcolors.RED + why + "You're bleeding!" + bcolors.END
 
 def info_cant_understand():
     print bcolors.RED + '''
@@ -456,13 +456,10 @@ def monster_room():
 
 def boss_room():
     tip_rand()
+    boss_lives = 3
     global lives
-    boss_hurt = False
 
-    if lives == 0:
-        dead()
-    else:
-        print '''
+    print '''
     -------------------------------------------------------------------------
     | You're in the large dark hall,                                        |
     | In the end of the hall, you can see the Main Boss, the Evil one       |
@@ -470,52 +467,49 @@ def boss_room():
     | "But you already knew it, right"?                                     |
     -------------------------------------------------------------------------
         '''
-
-        if lives == 3:
-            print '''
+    if lives == 3:
+        print '''
     ------------------------------------------------------------------------------
     | "Alright, you're strong enough for me, But what will you do, little hero?" |
     | - said Evil One and jumped to you with his black axe                       |
     ------------------------------------------------------------------------------
             '''
-            while True:
-                choice = raw_input("> Your action: ")
+        while boss_lives > 0:
+            choice = raw_input("> Your action: ")
 
-                if "sword" in choice and "sword" in inventory:
-                    print bcolors.BLUE + '''
+            if "sword" in choice and "sword" in inventory:
+                print bcolors.BLUE + '''
     ---------------------------------
     | "hah! It's not enough for me! |
     | "Aaaaarrrrggghhh!"            |
     ---------------------------------
                     ''' + bcolors.END
-                    boss_hurt = True
-                    lives -= 1
-                elif ("sword" in choice and "sword" in inventory) and boss_hurt:
-                    boss_dead()
-                elif "inventory" in choice:
-                    check_invent()
-                elif "lives" in choice:
-                    check_lives()
-                elif "heal" in choice:
-                    heal()
-                elif "back" in choice:
-                    info_cant_dothat()
-                elif "exit" in choice:
-                    exit(0)
-                elif lives == 1:
-                    dead()
-                else:
-                    damage("All your body hurts! ")
-
-        else:
-            print bcolors.RED + '''
+                boss_lives -= 1
+                lives -= 1
+            elif "inventory" in choice:
+                check_invent()
+            elif "lives" in choice:
+                check_lives()
+            elif "heal" in choice:
+                heal()
+            elif "back" in choice:
+                info_cant_dothat()
+            elif "exit" in choice:
+                exit(0)
+            elif lives == 1:
+                dead()
+            else:
+                info_cant_understand()
+        boss_dead()
+    else:
+        print bcolors.RED + '''
     -------------------------------
     | "Hah! You're so weak!" -    |
     | cried Main boss and smashed |
     | your face with his axe      |
     -------------------------------
         ''' + bcolors.END
-            dead()
+        dead('Your head was smashed! ')
 
 # start the game
 print welcome_messsage
