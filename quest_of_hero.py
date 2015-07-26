@@ -118,8 +118,8 @@ def info_choose_door():
     ''' + bcolors.END
 
 def info_boss_said():
-    print bcolors.BLUE + '''
-    "Hah, you're full, you can't hurt me like this!"
+    print bcolors.BLUE +'''
+    "Hah, you're fool, you can't hurt me like this!"
     ''' + bcolors.END
 
 # I really don't like code here, it's not universal :\
