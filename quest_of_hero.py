@@ -29,27 +29,27 @@ inventory = []
 # this function is for hero's inventory checking
 def check_invent():
     if len(inventory) == 0:
-        print bcolors.YELLOW + '''
+        print bcolors.YELLOW + """
     >>> Your inventory is empty <<<
-    ''' + bcolors.END
+    """ + bcolors.END
     else:
         for i in inventory:
-            print bcolors.YELLOW + '''
+            print bcolors.YELLOW + """
     >>> You have the %r in your inventory <<<
-            ''' % i + bcolors.END
+            """ % i + bcolors.END
 
 def heal():
     global lives
     global inventory
 
     if "health potion" not in inventory:
-        print bcolors.YELLOW + '''
+        print bcolors.YELLOW + """
     >>> Sorry, you don't have health potion <<<<
-    ''' + bcolors.END
+    """ + bcolors.END
     elif lives == 3 and "health potion" in inventory:
-        print bcolors.YELLOW + '''
+        print bcolors.YELLOW + """
     >>> Sorry, your health is full <<<<
-    ''' + bcolors.END
+    """ + bcolors.END
     else:
         lives += 1
         inventory.remove("health potion")
@@ -58,25 +58,25 @@ def heal():
 def check_lives():
     global lives
     if lives == 1:
-        print bcolors.RED + '''
+        print bcolors.RED + """
     >>> You have only 1 live left, be careful! <<<
-        ''' + bcolors.END
+        """ + bcolors.END
     else:
-        print bcolors.YELLOW + '''
+        print bcolors.YELLOW + """
     >>> You have %d lives <<<
-        ''' % lives + bcolors.END
+        """ % lives + bcolors.END
 
 def dead():
-    print bcolors.RED + '''
+    print bcolors.RED + """
     >>> You have no lives left  <<<
     >>>       GAME OVER         <<<
-    ''' + bcolors.END
+    """ + bcolors.END
     exit(0)
 
 def boss_dead():
-    print bcolors.GREEN + '''
+    print bcolors.GREEN + """
     >>> Congratulations! You defeat the Evil One! Now all our great kingdom is safe! <<<
-    ''' + bcolors.END
+    """ + bcolors.END
     exit(0)
 
 def tip_rand():
@@ -93,39 +93,39 @@ def damage(why):
     print bcolors.RED + why + "You're bleeding!" + bcolors.END
 
 def info_cant_understand():
-    print bcolors.RED + '''
+    print bcolors.RED + """
     ---------------------------
     | I can't understand you! |
     ---------------------------
-    ''' + bcolors.END
+    """ + bcolors.END
 
 def info_cant_dothat():
-    print bcolors.RED + '''
+    print bcolors.RED + """
     ----------------------
     | You can't do that! |
     ----------------------
-    ''' + bcolors.END
+    """ + bcolors.END
 
 def info_choose_door():
-    print bcolors.RED + '''
+    print bcolors.RED + """
     -----------------------------
     | Please, choose your door! |
     -----------------------------
-    ''' + bcolors.END
+    """ + bcolors.END
 
 def info_boss_said():
-    print bcolors.BLUE +'''
+    print bcolors.BLUE + """
     "Hah, you're fool, you can't hurt me like this!"
-    ''' + bcolors.END
+    """ + bcolors.END
 
 # I really don't like code here, it's not universal :\
 def choose_room_gold(direction):
-    print '''
+    print """
     -----------------------------------------------------------------------------
     | The room became lighter, now you can see two doors, one in the center,    |
     | another in the ''' + direction + ''' from you. Which one you will choose? |
     -----------------------------------------------------------------------------
-    '''
+    """
     another_choice = raw_input("> Make your choice: ")
     if direction in another_choice:
         lab_room()
@@ -147,12 +147,12 @@ def choose_room_gold(direction):
         choose_room_gold(direction)
 
 def choose_room_puzzle(direction):
-    print '''
+    print """
     -----------------------------------------------------------------------------
     | The room became lighter, now you can see two doors, one in the center,    |
     | another in the ''' + direction + ''' from you. Which one you will choose? |
     -----------------------------------------------------------------------------
-    '''
+    """
     another_choice = raw_input("> Make your choice: ")
     if direction in another_choice:
         monster_room()
@@ -181,14 +181,14 @@ def start():
         dead()
     else:
 
-        print '''
+        print """
     ------------------------------------------------------
     | You're in the middle of the strange dark cave.     |
     | You can see two doors.                             |
     | One in the left and another in the right from you. |
     | Which one you will choose?                         |
     ------------------------------------------------------
-    '''
+    """
         choice = raw_input('> Choose your door (left or right): ')
 
         if "left" in choice and not inventory:
@@ -219,7 +219,7 @@ def gold_room():
     if lives == 0:
         dead()
     else:
-        print '''
+        print """
     ----------------------------------------
     | You're in the gold room.             |
     | It's full of gold coins,             |
@@ -228,25 +228,25 @@ def gold_room():
     | Statue has a sword.                  |
     | What will you do?                    |
     ----------------------------------------
-        '''
+        """
         choice = raw_input("> Make your choice: ")
 
         if "coin" in choice:
-            print bcolors.BLUE + '''
+            print bcolors.BLUE + """
     ---------------------------------------------------------
     | You feel that floor is going down from over your feet.|
     | You falling down into darkness...                     |
     ---------------------------------------------------------
-            ''' + bcolors.END
+            """ + bcolors.END
             damage('You fell down! ')
             start()
         elif "take" and "sword" in choice:
             inventory.append('sword')
-            print bcolors.BLUE + '''
+            print bcolors.BLUE + """
     -------------------------------------
     | Now you have the sword, good job! |
     -------------------------------------
-            ''' + bcolors.END
+            """ + bcolors.END
             choose_room_gold("right")
         elif "inventory" in choice:
             check_invent()
@@ -273,7 +273,7 @@ def lab_room():
     if lives == 0:
         dead()
     else:
-        print '''
+        print """
     -------------------------------------------------------------------------
     | You're in the Great Sorcerer's labaratory.                            |
     | You see a lot of interesting stuff here.                              |
@@ -284,52 +284,52 @@ def lab_room():
     | o And a red one.                                                      |
     | What will you do?                                                     |
     -------------------------------------------------------------------------
-    '''
+    """
         choice = raw_input('> Make your choice: ')
         if "drink" in choice:
-            print bcolors.BLUE + '''
+            print bcolors.BLUE + """
     -----------------------------------------
     | You feel a fire inside you.           |
     | This was not a good idea to drink     |
     | a potion in sorcerer's room...        |
     -----------------------------------------
-        ''' + bcolors.END
+        """ + bcolors.END
             damage("You're poisoned! ")
             start()
         elif "take" in choice:
-            print bcolors.BLUE + '''
+            print bcolors.BLUE + """
     -----------------------------------------------------
     | You can hear the steps behind you.                |
     | You turned around immediatly and last thing       |
     | that you can see was the angry old mans' face.    |
     | He put a very powerful spell on you.              |
     -----------------------------------------------------
-    ''' + bcolors.END
+    """ + bcolors.END
             damage("You're on fire! ")
             start()
         elif "red" in choice:
-            print bcolors.RED + '''
+            print bcolors.RED + """
     ---------
     | BOOM! |
     ---------
-            ''' + bcolors.END
+            """ + bcolors.END
             damage("It was really powerful explosion! ")
             start()
         elif "mix" and ("blue" and "green") in choice:
             if 'health potion' in inventory:
-                print bcolors.BLUE + '''
+                print bcolors.BLUE + """
         --------------------------------------------------
         | Walls are dissapeared...                       |
         --------------------------------------------------
-        ''' + bcolors.END
+        """ + bcolors.END
                 monster_room()
             else:
-                print bcolors.BLUE + '''
+                print bcolors.BLUE + """
         --------------------------------------------------
         | Walls are dissapeared...                       |
         | And... you have a health potion now, good job! |
         --------------------------------------------------
-        ''' + bcolors.END
+        """ + bcolors.END
                 inventory.append('health potion')
                 monster_room()
         elif "inventory" in choice:
@@ -359,7 +359,7 @@ def puzzle_room():
     if lives == 0:
         dead()
     else:
-        print '''
+        print """
     -----------------------------------------------
     | You walked into a new room.                 |
     | Door is suddenly closed behind you.         |
@@ -367,7 +367,7 @@ def puzzle_room():
     | "If EELS + MARK + BEST + WARY = EASY        |
     | What does HELP + BARK + WARD + LEAD equal?" |
     -----------------------------------------------
-        '''
+        """
     choice = raw_input('> Your answer: ')
 
     # positive:
@@ -388,11 +388,11 @@ def puzzle_room():
     elif "exit" in choice:
         exit(0)
     else:
-        print bcolors.RED + '''
+        print bcolors.RED + """
     ---------------------
     | "You're WRONG!!!" |
     ---------------------
-        ''' + bcolors.END
+        """ + bcolors.END
         damage('You feel like a thousond nails are hurting you! ')
         start()
 
@@ -403,7 +403,7 @@ def monster_room():
     if lives == 0:
         dead()
     else:
-        print '''
+        print """
     -----------------------------------------------
     | First thing that you thought was:           |
     | "It's reaaaally stinks here", and it's true:|
@@ -411,24 +411,24 @@ def monster_room():
     | He looks really sick and little angry       |
     | What will you do?                           |
     -----------------------------------------------
-        '''
+        """
         choice = raw_input("> Make your choice: ")
         if 'health potion' in inventory and "give" and 'health potion' in choice:
             inventory.remove('health potion')
-            print bcolors.BLUE + '''
+            print bcolors.BLUE + """
     ------------------------------------------------------------
     | Goblin looks happy, 'U clan gou tu bos rom naw', he said |
     ------------------------------------------------------------
-            ''' + bcolors.END
+            """ + bcolors.END
             boss_room()
         elif 'sword' in inventory and ('beat' and 'sword') in choice:
             inventory.remove('sword')
-            print '''
+            print """
     ---------------------------------------------------------------------------
     | After your hit Goblin cry in pain, 'U clan gou tu bos rom naw', he said |
     | Unfortunately, your sword is broken now. Anyway it was really old       |
     ---------------------------------------------------------------------------
-    '''
+    """
             boss_room()
         elif "inventory" in choice:
             check_invent()
@@ -445,12 +445,12 @@ def monster_room():
         elif "exit" in choice:
             exit(0)
         else:
-            print bcolors.RED + '''
+            print bcolors.RED + """
     ------------------------------------------------
     | Your decision freakin' out green goblin:     |
     | 'Aaaaarrrrggghhh!' he beats you with his axe |
     -------------------------------------------------
-        ''' + bcolors.END
+        """ + bcolors.END
             damage("You can't feel your right hand! ")
             start()
 
@@ -459,31 +459,31 @@ def boss_room():
     boss_lives = 3
     global lives
 
-    print '''
+    print """
     -------------------------------------------------------------------------
     | You're in the large dark hall,                                        |
     | In the end of the hall, you can see the Main Boss, the Evil one       |
     | "Hello, 'hero'" he said. "You must have all you strength to defeat me"|
     | "But you already knew it, right"?                                     |
     -------------------------------------------------------------------------
-        '''
+        """
     if lives == 3:
-        print '''
+        print """
     ------------------------------------------------------------------------------
     | "Alright, you're strong enough for me, But what will you do, little hero?" |
     | - said Evil One and jumped to you with his black axe                       |
     ------------------------------------------------------------------------------
-            '''
+            """
         while boss_lives > 0:
             choice = raw_input("> Your action: ")
 
             if "sword" in choice and "sword" in inventory:
-                print bcolors.BLUE + '''
+                print bcolors.BLUE + """
     ---------------------------------
     | "hah! It's not enough for me! |
     | "Aaaaarrrrggghhh!"            |
     ---------------------------------
-                    ''' + bcolors.END
+                """ + bcolors.END
                 boss_lives -= 1
                 lives -= 1
             elif "inventory" in choice:
@@ -502,13 +502,13 @@ def boss_room():
                 info_cant_understand()
         boss_dead()
     else:
-        print bcolors.RED + '''
+        print bcolors.RED + """
     -------------------------------
     | "Hah! You're so weak!" -    |
     | cried Main boss and smashed |
     | your face with his axe      |
     -------------------------------
-        ''' + bcolors.END
+        """ + bcolors.END
         dead('Your head was smashed! ')
 
 # start the game
