@@ -5,4 +5,3 @@
 - [X] Add boss_room();
 - [X] Fix an issue with double taking sword or shield;
 - [ ] OPTIONAL - Rewrite main script by using the module architecture;
-- [ ] OPTIONAL - Add a timer to the puzzle room 1;
